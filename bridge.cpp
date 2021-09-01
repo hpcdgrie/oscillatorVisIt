@@ -161,9 +161,9 @@ static visit_handle newUnstructuredBlock(const double *origin,
         for (int i = cellExts.min[0]; i <= cellExts.max[0] + 1; ++i)
         {
           double x = origin[0] + spacing[0] * i;
-          bridge->Internals->vertices[0].at(idx) = x;
-          bridge->Internals->vertices[1].at(idx) = y;
-          bridge->Internals->vertices[2].at(idx) = z;
+          bridge->Internals->vertices[0][idx] = x;
+          bridge->Internals->vertices[1][idx] = y;
+          bridge->Internals->vertices[2][idx] = z;
           ++idx;
         }
       }
@@ -192,6 +192,7 @@ static visit_handle newUnstructuredBlock(const double *origin,
     auto &cl = bridge->Internals->cl;
     cl.resize(ncells * 9);
     auto &ghostIndicees = bridge->Internals->ghostIndicees;
+    ghostIndicees.clear();
     ghostIndicees.reserve(ncells);
     idx = 0;
     int nxny = (ncx + 1) * (ncy + 1);
